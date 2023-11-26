@@ -7,7 +7,7 @@ import {
   StudentModel,
   TUserName,
   // studentMethods,
-} from './student/student.interface';
+} from './student.interface';
 // import bcrypt from 'bcrypt';
 // import config from '../config'
 
