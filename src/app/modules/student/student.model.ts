@@ -8,8 +8,6 @@ import {
   TUserName,
   // studentMethods,
 } from './student.interface';
-// import bcrypt from 'bcrypt';
-// import config from '../config'
 
 const userNameSchema = new Schema<TUserName>({
   firstName: {
@@ -146,10 +144,17 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       required: [true, 'Local guardian information is required'],
     },
     profileImage: { type: String },
-    admissionSemester: { type: Schema.Types.ObjectId, ref: 'academicSemester' },
+    admissionSemester: {
+      type: Schema.Types.ObjectId,
+      ref: 'AcademicSemester',
+    },
     isDeleted: {
       type: Boolean,
       default: false,
+    },
+    academicDepartment: {
+      type: Schema.Types.ObjectId,
+      ref: 'AcademicDepartment',
     },
   },
   {
