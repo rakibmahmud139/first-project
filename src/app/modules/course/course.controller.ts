@@ -56,7 +56,7 @@ const deleteCourse = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Course is deleted succesfully',
+    message: 'Course is deleted successfully',
     data: result,
   });
 });
@@ -73,7 +73,7 @@ const assignFacultiesWithCourse = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Faculties assigned  succesfully',
+    message: 'Faculties assigned  successfully',
     data: result,
   });
 });
@@ -90,7 +90,7 @@ const removeFacultiesFromCourse = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Faculties removed  succesfully',
+    message: 'Faculties removed  successfully',
     data: result,
   });
 });
