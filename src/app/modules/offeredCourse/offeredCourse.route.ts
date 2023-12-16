@@ -13,18 +13,18 @@ router.post(
   offeredCourseControllers.createOfferedCourse,
 );
 
-// router.get('/',);
+router.get('/', offeredCourseControllers.getAllOfferedCourses);
 
-// router.get(
-//   '/:id',
-// );
+router.get('/:id', offeredCourseControllers.getSingleOfferedCourses);
 
-// router.patch(
-//   '/:id',
-//   validatedRequest(
-//     offeredCourseValidations.updateOfferedCourseCourseValidationSchema,
-//   ),
-//   ,
-// );
+router.patch(
+  '/:id',
+  validatedRequest(
+    offeredCourseValidations.updateOfferedCourseCourseValidationSchema,
+  ),
+  offeredCourseControllers.updateOfferedCourse,
+);
+
+router.delete('/:id', offeredCourseControllers.deleteOfferedCourseFromDB);
 
 export const offeredCourseRoutes = router;
