@@ -52,7 +52,7 @@ const updateSemesterRegistration = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Semester registration created successfully',
+    message: 'Semester registration updated successfully',
     data: result,
   });
 });

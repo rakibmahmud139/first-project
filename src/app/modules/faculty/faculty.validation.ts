@@ -13,7 +13,7 @@ const createUserNameValidationSchema = z.object({
   lastName: z.string(),
 });
 
-export const createFacultyValidationSchema = z.object({
+const createFacultyValidationSchema = z.object({
   body: z.object({
     password: z.string().max(20),
     faculty: z.object({
@@ -24,7 +24,7 @@ export const createFacultyValidationSchema = z.object({
       email: z.string().email(),
       contactNo: z.string(),
       emergencyContactNo: z.string(),
-      bloogGroup: z.enum([...BloodGroup] as [string, ...string[]]),
+      bloodGroup: z.enum([...BloodGroup] as [string, ...string[]]),
       presentAddress: z.string(),
       permanentAddress: z.string(),
       academicDepartment: z.string(),
@@ -39,7 +39,7 @@ const updateUserNameValidationSchema = z.object({
   lastName: z.string().optional(),
 });
 
-export const updateFacultyValidationSchema = z.object({
+const updateFacultyValidationSchema = z.object({
   body: z.object({
     faculty: z.object({
       designation: z.string().optional(),
@@ -58,7 +58,7 @@ export const updateFacultyValidationSchema = z.object({
   }),
 });
 
-export const studentValidations = {
+export const facultyValidations = {
   createFacultyValidationSchema,
   updateFacultyValidationSchema,
 };
