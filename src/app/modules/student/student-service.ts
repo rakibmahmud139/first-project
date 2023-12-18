@@ -97,6 +97,7 @@ const getAllStudentFromDB = async (query: Record<string, unknown>) => {
 
 const getSingleStudentFromDB = async (id: string) => {
   const result = Student.findById(id)
+    .populate('user')
     .populate('admissionSemester')
     .populate({
       path: 'academicDepartment',

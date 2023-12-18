@@ -10,13 +10,12 @@ const getSingleFaculty = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Faculty is retrieved succesfully',
+    message: 'Faculty is retrieved successfully',
     data: result,
   });
 });
 
 const getAllFaculties = catchAsync(async (req, res) => {
-  console.log('test', req.user);
   const result = await FacultyServices.getAllFacultiesFromDB(req.query);
 
   sendResponse(res, {
@@ -35,7 +34,7 @@ const updateFaculty = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Faculty is updated succesfully',
+    message: 'Faculty is updated successfully',
     data: result,
   });
 });
@@ -47,7 +46,7 @@ const deleteFaculty = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Faculty is deleted succesfully',
+    message: 'Faculty is deleted successfully',
     data: result,
   });
 });
