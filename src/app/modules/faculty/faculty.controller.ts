@@ -6,7 +6,7 @@ import { FacultyServices } from './faculty.service';
 const getSingleFaculty = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await FacultyServices.getSingleFacultyFromDB(id);
-
+  console.log(req.cookies);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
