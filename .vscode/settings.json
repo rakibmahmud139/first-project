@@ -9,6 +9,7 @@
     "cloudinary",
     "Coursefaculty",
     "datetime",
+    "fieldname",
     "maxlength",
     "nxdb",
     "ryiq",
