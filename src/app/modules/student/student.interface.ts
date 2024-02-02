@@ -38,10 +38,11 @@ export type TStudent = {
   permanentAddress: string;
   guardian: TGuardian;
   localGuardian: TLocalGuardian;
-  profileImage?: string;
+  profileImg?: string;
   admissionSemester: Types.ObjectId;
-  isDeleted: boolean;
   academicDepartment: Types.ObjectId;
+  academicFaculty: Types.ObjectId;
+  isDeleted: boolean;
 };
 
 //for creating static

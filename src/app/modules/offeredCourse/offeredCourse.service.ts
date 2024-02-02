@@ -10,6 +10,7 @@ import { Course } from '../course/course.model';
 import { Faculty } from '../faculty/faculty.model';
 import { hasTimeConflict } from './offeredCourse.utils';
 import QueryBuilder from '../../builder/QueryBuilder';
+import { Student } from '../student/student.model';
 
 const createOfferedCourseIntoDB = async (payload: TOfferedCourse) => {
   const {
@@ -117,7 +118,27 @@ const getAllOfferedCoursesFromDB = async (query: Record<string, unknown>) => {
     .fields();
 
   const result = await offeredCourseQuery.modelQuery;
-  return result;
+  const meta = await offeredCourseQuery.countTotal();
+
+  return {
+    meta,
+    result,
+  };
+};
+const getMyOfferedCoursesFromDB = async (userId: string) => {
+  //find the student
+  const student = await Student.findOne({ id: userId });
+
+  if (!student) {
+    throw new AppError(404, 'Student not found');
+  }
+
+  //find current ongoing semester
+  const currentOngoingSemester = await SemesterRegistration.findOne({
+    status: 'ONGOING',
+  });
+
+  return currentOngoingSemester;
 };
 
 const getSingleOfferedCourseFromDB = async (id: string) => {
@@ -223,6 +244,7 @@ export const offeredCourseServices = {
   createOfferedCourseIntoDB,
   updateOfferedCourseIntoDB,
   getAllOfferedCoursesFromDB,
+  getMyOfferedCoursesFromDB,
   getSingleOfferedCourseFromDB,
   deleteOfferedCourseFromDB,
 };
