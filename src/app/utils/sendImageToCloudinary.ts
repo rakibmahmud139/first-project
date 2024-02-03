@@ -2,6 +2,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
 import fs from 'fs';
 import config from '../config';
+import { UploadApiResponse } from 'cloudinary';
 
 cloudinary.config({
   cloud_name: config.cloud_name,
@@ -21,7 +22,7 @@ export const sendImageToCloudinary = (
         if (error) {
           reject(error);
         }
-        resolve(result);
+        resolve(result as UploadApiResponse);
 
         //delete a file asyncrhonously
         fs.unlink(path, (err) => {
