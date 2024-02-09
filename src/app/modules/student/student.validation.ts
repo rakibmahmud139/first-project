@@ -92,10 +92,10 @@ const updateLocalGuardianValidationSchema = z.object({
 const updateStudentValidationSchema = z.object({
   body: z.object({
     student: z.object({
-      name: updateUserNameValidationSchema,
+      name: updateUserNameValidationSchema.optional(),
       gender: z.enum(['male', 'female', 'others']).optional(),
       dateOfBirth: z.string().optional(),
-      email: z.string().email().min(1),
+      email: z.string().email().min(1).optional(),
       contactNo: z.string().min(1).optional(),
       emergencyContactNo: z.string().min(1).optional(),
       bloodGroup: z
@@ -103,8 +103,8 @@ const updateStudentValidationSchema = z.object({
         .optional(),
       presentAddress: z.string().min(1).optional(),
       permanentAddress: z.string().min(1).optional(),
-      guardian: updateGuardianValidationSchema,
-      localGuardian: updateLocalGuardianValidationSchema,
+      guardian: updateGuardianValidationSchema.optional(),
+      localGuardian: updateLocalGuardianValidationSchema.optional(),
       profileImage: z.string().optional().optional(),
       admissionSemester: z.string().optional(),
       academicDepartment: z.string().optional(),
