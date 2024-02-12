@@ -34,11 +34,13 @@ const getMyOfferedCourses = catchAsync(async (req, res) => {
     userId,
     req.query,
   );
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'OfferedCourses retrieved successfully !',
-    data: result,
+    meta: result.meta,
+    data: result.result,
   });
 });
 

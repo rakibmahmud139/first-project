@@ -131,15 +131,15 @@ const getMyOfferedCoursesFromDB = async (
   query: Record<string, unknown>,
 ) => {
   //pagination setup
+
   const page = Number(query?.page) || 1;
   const limit = Number(query?.limit) || 10;
   const skip = (page - 1) * limit;
 
-  //find the student
   const student = await Student.findOne({ id: userId });
-
+  // find the student
   if (!student) {
-    throw new AppError(404, 'Student not found');
+    throw new AppError(httpStatus.NOT_FOUND, 'User is not found');
   }
 
   //find current ongoing semester
@@ -150,7 +150,10 @@ const getMyOfferedCoursesFromDB = async (
   );
 
   if (!currentOngoingRegistrationSemester) {
-    throw new AppError(404, 'There id no ongoing semester');
+    throw new AppError(
+      httpStatus.NOT_FOUND,
+      'There is no ongoing semester registration!',
+    );
   }
 
   const aggregationQuery = [
@@ -220,7 +223,7 @@ const getMyOfferedCoursesFromDB = async (
                     $eq: ['$student', '$$currentStudent'],
                   },
                   {
-                    $eq: ['isCompleted', true],
+                    $eq: ['$isCompleted', true],
                   },
                 ],
               },
@@ -243,11 +246,9 @@ const getMyOfferedCoursesFromDB = async (
     },
     {
       $addFields: {
-        isPreRequisitesFulFIlled: {
+        isPreRequisitesFulFilled: {
           $or: [
-            {
-              $eq: ['$course.preRequisiteCourses', []],
-            },
+            { $eq: ['$course.preRequisiteCourses', []] },
             {
               $setIsSubset: [
                 '$course.preRequisiteCourses.course',
@@ -256,6 +257,7 @@ const getMyOfferedCoursesFromDB = async (
             },
           ],
         },
+
         isAlreadyEnrolled: {
           $in: [
             '$course._id',
@@ -273,7 +275,7 @@ const getMyOfferedCoursesFromDB = async (
     {
       $match: {
         isAlreadyEnrolled: false,
-        isPreRequisitesFulFIlled: true,
+        isPreRequisitesFulFilled: true,
       },
     },
   ];
@@ -293,7 +295,8 @@ const getMyOfferedCoursesFromDB = async (
   ]);
 
   const total = (await OfferedCourse.aggregate(aggregationQuery)).length;
-  const totalPage = Math.ceil(total / limit);
+
+  const totalPage = Math.ceil(result.length / limit);
 
   return {
     meta: {
